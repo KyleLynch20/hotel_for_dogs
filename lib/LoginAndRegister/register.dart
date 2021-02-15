@@ -3,9 +3,15 @@ import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/custom_button.dart';
 
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register>{
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -3,9 +3,16 @@ import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/custom_button.dart';
 import 'package:hotel_for_dogs/image_container.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
