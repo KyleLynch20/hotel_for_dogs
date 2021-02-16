@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
-import 'package:hotel_for_dogs/LoginAndRegister/custom_button.dart';
+import 'package:hotel_for_dogs/database.dart';
 import 'package:hotel_for_dogs/image_container.dart';
 
 class Login extends StatefulWidget {
-
   @override
   _LoginState createState() => _LoginState();
 }
@@ -12,6 +11,19 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  Future<String> delivery;
+  String errorMessage = "";
+
+  void _login() async {
+    delivery = Database.login(emailController.text, passwordController.text);
+    await delivery.then((String result) => setState(() {
+      if (result == "success") {
+        //Navigator.pushNamed(context, "/");
+      } else {
+        errorMessage = result;
+      }
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,21 @@ class _LoginState extends State<Login> {
                 ImageContainer(),
                 CustomTextField("Email", emailController),
                 CustomTextField("Password", passwordController),
-                CustomButton("Login",context,"/main",emailController, passwordController, "login"),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
+                  child:  RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(17.0),
+                          side: BorderSide(color: Colors.blueAccent)
+                      ),
+                      onPressed: () {
+                        _login();
+                      },
+                      textColor: Colors.blueAccent,
+                      padding: const EdgeInsets.all(0.0),
+                      child: Text("Login", style: TextStyle(fontSize: 20), )
+                  ),
+                ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
                   child:  RaisedButton(
@@ -43,6 +69,12 @@ class _LoginState extends State<Login> {
                       textColor: Colors.blueAccent,
                       padding: const EdgeInsets.all(0.0),
                       child: Text("Register", style: TextStyle(fontSize: 20), )
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
+                  child: Center(
+                      child: Text(errorMessage, style: TextStyle(fontSize: 20, color: Colors.red))
                   ),
                 )
             ],

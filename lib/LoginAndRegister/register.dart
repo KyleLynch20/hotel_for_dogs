@@ -35,6 +35,8 @@ class _RegisterState extends State<Register>{
             title: Text('Dog Hotel'),
           ),
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               CustomTextField("Email", emailController),
               CustomTextField("Password", passwordController),
@@ -47,9 +49,7 @@ class _RegisterState extends State<Register>{
                         side: BorderSide(color: Colors.blueAccent)
                     ),
                     onPressed: () {
-                      setState(() {
-                        emailSignUp();
-                      });
+                      emailSignUp();
                     },
                     textColor: Colors.blueAccent,
                     padding: const EdgeInsets.all(0.0),
@@ -58,7 +58,9 @@ class _RegisterState extends State<Register>{
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
-                child: Text(errorMessage),
+                child: Center(
+                    child: Text(errorMessage, style: TextStyle(fontSize: 20, color: Colors.red),)
+                ),
               )
 
             ],
