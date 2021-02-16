@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 import 'package:hotel_for_dogs/database.dart';
 import 'package:hotel_for_dogs/image_container.dart';
+import 'package:hotel_for_dogs/forum_page.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,10 +18,17 @@ class _LoginState extends State<Login> {
   void _login() async {
     delivery = Database.login(emailController.text, passwordController.text);
     await delivery.then((String result) => setState(() {
-      if (result == "success") {
-        //Navigator.pushNamed(context, "/");
-      } else {
+      if (result == "No user found for that email" ||
+          result == "Wrong password provided for that user" ||
+          result == "All fields required!") {
         errorMessage = result;
+      } else {
+        //Navigator.pushNamed(context, "/");
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ForumPage(userID: result),
+            ));
       }
     }));
   }
