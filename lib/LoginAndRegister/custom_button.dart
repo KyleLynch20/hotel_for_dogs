@@ -32,7 +32,7 @@ class CustomButton extends StatelessWidget {
               // implement login
             } else if (_mode == "register") {
               // fix this method to return true or false
-              Database.signUp(_emailController.text, _passwordController.text);
+              //Database.signUp(_emailController.text, _passwordController.text);
               // if true then return to login else display error message
               Navigator.pushNamed(_ctx, _path);
             }

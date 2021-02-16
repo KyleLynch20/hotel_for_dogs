@@ -21,16 +21,32 @@ class _LoginState extends State<Login> {
           appBar: AppBar(
             title: Text('Dog Hotel'),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ImageContainer(),
-              CustomTextField("Email", emailController),
-              CustomTextField("Password", passwordController),
-              CustomButton("Login",context,"/main",emailController, passwordController, "login"),
-              CustomButton("Register", context,"/register",emailController, passwordController, "pass")
+          body: SingleChildScrollView(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ImageContainer(),
+                CustomTextField("Email", emailController),
+                CustomTextField("Password", passwordController),
+                CustomButton("Login",context,"/main",emailController, passwordController, "login"),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
+                  child:  RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(17.0),
+                          side: BorderSide(color: Colors.blueAccent)
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/register");
+                      },
+                      textColor: Colors.blueAccent,
+                      padding: const EdgeInsets.all(0.0),
+                      child: Text("Register", style: TextStyle(fontSize: 20), )
+                  ),
+                )
             ],
+              )
           )
       ),
     );
