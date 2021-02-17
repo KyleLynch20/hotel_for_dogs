@@ -26,7 +26,7 @@ class _LoginState extends State<Login> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ForumPage(userID: result),
+              builder: (context) => ForumPage(userID: result, email: "kylesportsfan@comcast.net",),
             ));
       }
     }));

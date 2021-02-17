@@ -8,7 +8,8 @@ import 'package:firebase_database/firebase_database.dart';
 
 class ForumPage extends StatefulWidget {
   final String userID;
-  ForumPage({Key key,  this.userID}) : super(key: key);
+  final String email;
+  ForumPage({Key key,  this.userID, this.email}) : super(key: key);
 
   @override
   _ForumPageState createState() => _ForumPageState();
@@ -209,7 +210,7 @@ class _ForumPageState extends State<ForumPage>{
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NeedPostForum(),
+                              builder: (context) => NeedPostForum(widget.email,widget.userID,stateController.text,cityController.text),
                             ));
                       }
                     },
