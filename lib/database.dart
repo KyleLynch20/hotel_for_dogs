@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 
 class Database {
@@ -53,5 +54,21 @@ class Database {
     }
 
     return userCredential.user.uid;
+  }
+
+  static void makeNeedPost(String dogBreed, String dogNeeds, String amountPerDay, String amountPerHour, String pottyTrained, String animalFriendly, String state, String city){
+    var _firebaseRef = FirebaseDatabase().reference().child('posts');
+    _firebaseRef.push().set({
+      "dogBreed": dogBreed,
+      "dogNeeds": dogNeeds,
+      "amountPerDay": amountPerDay,
+      "amountPerHour": amountPerHour,
+      "pottyTrained": pottyTrained,
+      "animalFriendly": animalFriendly,
+      "date": "test",
+      "state": state,
+      "city": city,
+    });
+
   }
 }

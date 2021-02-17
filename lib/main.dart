@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/register.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/login.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:hotel_for_dogs/need_post.dart';
+import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/Posts/need_post.dart';
+import 'package:hotel_for_dogs/Posts/need_post_forum.dart';
 
 void main() async  {
   WidgetsFlutterBinding.ensureInitialized();

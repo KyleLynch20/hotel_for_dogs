@@ -8,11 +8,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
+    return Container(
           padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
           child: TextField(
             controller: _controller,
@@ -22,8 +18,6 @@ class CustomTextField extends StatelessWidget {
             ),
             cursorColor: Colors.blueAccent,
           ),
-        ),
-      ],
     );
   }
 }

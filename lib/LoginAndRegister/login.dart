@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 import 'package:hotel_for_dogs/database.dart';
-import 'package:hotel_for_dogs/image_container.dart';
-import 'package:hotel_for_dogs/forum_page.dart';
+import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/LoginAndRegister/image_container.dart';
+import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/Forum/forum_page.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -23,7 +23,6 @@ class _LoginState extends State<Login> {
           result == "All fields required!") {
         errorMessage = result;
       } else {
-        //Navigator.pushNamed(context, "/");
         Navigator.push(
             context,
             MaterialPageRoute(

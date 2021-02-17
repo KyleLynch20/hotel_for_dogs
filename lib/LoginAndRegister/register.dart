@@ -58,6 +58,21 @@ class _RegisterState extends State<Register>{
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
+                child:  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(17.0),
+                        side: BorderSide(color: Colors.blueAccent)
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/");
+                    },
+                    textColor: Colors.blueAccent,
+                    padding: const EdgeInsets.all(0.0),
+                    child: Text("Already have an account? Sign in", style: TextStyle(fontSize: 20), )
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
                 child: Center(
                     child: Text(errorMessage, style: TextStyle(fontSize: 20, color: Colors.red),)
                 ),
