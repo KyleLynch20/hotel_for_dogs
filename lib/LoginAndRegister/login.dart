@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 import 'package:hotel_for_dogs/database.dart';
+import 'package:hotel_for_dogs/user.dart';
 import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/LoginAndRegister/image_container.dart';
 import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/Forum/forum_page.dart';
 
@@ -12,21 +13,19 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  Future<String> delivery;
+  Future<Users> delivery;
   String errorMessage = "";
 
   void _login() async {
     delivery = Database.login(emailController.text, passwordController.text);
-    await delivery.then((String result) => setState(() {
-      if (result == "No user found for that email" ||
-          result == "Wrong password provided for that user" ||
-          result == "All fields required!") {
-        errorMessage = result;
+    await delivery.then((Users user) => setState(() {
+      if (user.email == null && user.uid == null) {
+        errorMessage = user.errorMessage;
       } else {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ForumPage(userID: result, email: "kylesportsfan@comcast.net",),
+              builder: (context) => ForumPage(userID: user.uid, email: user.email,),
             ));
       }
     }));

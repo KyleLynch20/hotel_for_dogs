@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/Posts/custom_text.dart';
 
 class NeedPost extends StatelessWidget {
+  final String _tile;
   final String _dogBreed;
   final String _dogNeeds;
   final String _amountPerDay;
@@ -11,9 +12,14 @@ class NeedPost extends StatelessWidget {
   final String _date;
   final String _state;
   final String _city;
+  final String _dogName;
+  final String _email;
+  final String _phone;
+  final String _fullName;
 
-  NeedPost(this._dogBreed, this._dogNeeds, this._amountPerDay, this._amountPerHour, this._pottyTrained,
-           this._animalFriendly, this._date, this._state, this._city);
+
+  NeedPost(this._tile, this._dogBreed, this._dogNeeds, this._amountPerDay, this._amountPerHour, this._pottyTrained,
+           this._animalFriendly, this._date, this._state, this._city, this._dogName, this._email, this._phone, this._fullName);
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +31,25 @@ class NeedPost extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // this needs work implement a list view
             Container(
                 child: Center(
                   child: Text(
-                    "In need of a sitter!",
+                    _tile,
                     style: TextStyle(fontSize: 20),
                   ),
                 )),
             CustomText("Dog Breed", _dogBreed.toString()),
+            CustomText("Dog Name", _dogName.toString()),
             CustomText("Dog Needs", _dogNeeds.toString()),
-            CustomText("Amount Per Day", _amountPerDay.toString()),
+            CustomText("Away time", _amountPerDay.toString()),
             CustomText("Amount Per Hour", _amountPerHour.toString()),
             CustomText("Is the dog potty trained", _pottyTrained.toString()),
             CustomText("Is the dog friendly with other animals", _animalFriendly.toString()),
-            CustomText("Date", _date.toString()),
-            CustomText("State ", _state.toString()),
+            CustomText("Email", _email.toString()),
+            CustomText("Phone", _phone.toString()),
+            CustomText("Name", _fullName.toString()),
+            CustomText("Date Posted", _date.toString()),
+            CustomText("State", _state.toString()),
             CustomText("City", _city.toString())
           ],
         ));

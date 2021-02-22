@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:hotel_for_dogs/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
 
 
 class Database {
@@ -14,13 +17,10 @@ class Database {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
         return "The password provided is too weak";
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
         return "The account already exists for that email";
       } else if (e.code == 'unknown') {
-        print('All fields required!');
         return "All fields required!";
       } else {
         print(e);
@@ -33,7 +33,7 @@ class Database {
     return "success";
   }
 
-  static Future<String> login(String email, String password) async {
+  static Future<Users> login(String email, String password) async {
     UserCredential userCredential;
     try {
       userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -42,33 +42,48 @@ class Database {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        return "No user found for that email";
+        return new Users(null, null, "No user found for that email");
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user');
-        return "Wrong password provided for that user";
+        return new Users(null, null, "Wrong password provided for that user");
       } else if (e.code == 'unknown') {
-        print('All fields required!');
-        return "All fields required!";
+        return new Users(null, null, "All fields required!");
       }
     }
-
-    return userCredential.user.uid;
+    return new Users(email, userCredential.user.uid.toString(), null);
   }
 
-  static void makeNeedPost(String dogBreed, String dogNeeds, String amountPerDay, String amountPerHour, String pottyTrained, String animalFriendly, String state, String city){
-    var _firebaseRef = FirebaseDatabase().reference().child('posts');
-    _firebaseRef.push().set({
+  // need to add user id, full name, phone, email
+  static void makeNeedPost( String title, String dogBreed, String dogNeeds,
+                            String amountOfTime, String amountPerHour,
+                            String pottyTrained, String animalFriendly,
+                            String state, String city, String dogName,
+                            String email, String phone, String fullName) {
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('MM-dd-yyyy');
+    String formattedDate = formatter.format(now);
+
+    CollectionReference _firebaseRef = FirebaseFirestore.instance.collection('needPosts');
+    _firebaseRef.add({
+      "title": title,
       "dogBreed": dogBreed,
       "dogNeeds": dogNeeds,
-      "amountPerDay": amountPerDay,
+      "amountOfTime": amountOfTime,
       "amountPerHour": amountPerHour,
       "pottyTrained": pottyTrained,
       "animalFriendly": animalFriendly,
-      "date": "test",
+      "date": formattedDate,
       "state": state,
       "city": city,
-    });
+      "dogName": dogName,
+      "email": email,
+      "phone": phone,
+      "fullName": fullName
+    })
+        .then((value) => print("success (need post)"))
+        .catchError((error) => print("fail (need post): $error"));
+
+
 
   }
 }

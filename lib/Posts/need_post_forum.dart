@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 import 'package:hotel_for_dogs/database.dart';
 import 'custom_row.dart';
+import 'package:hotel_for_dogs/Forum/forum_page.dart';
+import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
 
 class NeedPostForum extends StatefulWidget {
   // need to get email, uid, state, and city
@@ -22,12 +23,13 @@ class _NeedPostForumState extends State<NeedPostForum> {
   final stateController = TextEditingController();
   final cityController = TextEditingController();
   final amountPerHourController = TextEditingController();
-  final amountPerDayController = TextEditingController();
-  final emailController = TextEditingController();
+  final amountOfTimeController = TextEditingController();
+  final fullNameController = TextEditingController();
   final phoneController = TextEditingController();
   final bioController = TextEditingController();
   final animalFriendlyController = TextEditingController();
   final pottyTrainedController = TextEditingController();
+  final titleController = TextEditingController();
 
   Future<String> delivery;
   String errorMessage = "";
@@ -45,10 +47,11 @@ class _NeedPostForumState extends State<NeedPostForum> {
               child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CustomRow("Dog Breed","Dog Name",dogBreedController, dogNameController),
-                CustomRow("Animal Friendly","Potty Trained",animalFriendlyController, pottyTrainedController),
-                CustomRow("Amount Per Hour","Amount Per Day",amountPerHourController, amountPerDayController),
-                CustomRow("Phone Number","Email",phoneController, emailController),
+                CustomTextField("Title for post", titleController),
+                CustomRow("Dog Breed", "Dog Name", dogBreedController, dogNameController),
+                CustomRow("Animal Friendly", "Potty Trained", animalFriendlyController, pottyTrainedController),
+                CustomRow("Amount Per Hour", "Amount of Time", amountPerHourController, amountOfTimeController),
+                CustomRow("Phone Number", "Full Name", phoneController, fullNameController),
                 Container(
                   padding: const EdgeInsets.all(10.0),
                   child: TextField(
@@ -68,15 +71,26 @@ class _NeedPostForumState extends State<NeedPostForum> {
                           side: BorderSide(color: Colors.blueAccent)
                       ),
                       onPressed: () {
-                        // missing dog name, email and phone
-                        Database.makeNeedPost(dogBreedController.text,
+                        // missing dog name, email, and phone, full name
+                        Database.makeNeedPost(titleController.text,
+                                              dogBreedController.text,
                                               bioController.text,
-                                              amountPerDayController.text,
+                                              amountOfTimeController.text,
                                               amountPerHourController.text,
                                               animalFriendlyController.text,
                                               pottyTrainedController.text,
                                               widget.state,
-                                              widget.city);
+                                              widget.city,
+                                              dogNameController.text,
+                                              widget.email,
+                                              phoneController.text,
+                                              fullNameController.text);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForumPage(userID: widget.email, email: widget.uid,),
+                            ));
                       },
                       textColor: Colors.blueAccent,
                       padding: const EdgeInsets.all(0.0),
