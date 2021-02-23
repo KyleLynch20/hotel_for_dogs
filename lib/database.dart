@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 
 class Database {
+
   static Future<String> signUp(String email, String password, String confirmPassword) async {
     if (password != confirmPassword) {
       return "passwords do not match";
@@ -82,6 +83,34 @@ class Database {
     })
         .then((value) => print("success (need post)"))
         .catchError((error) => print("fail (need post): $error"));
+  }
+
+
+  static void makeSitterPost(String title, String breedSizeController, String bio,
+      String amountPerHour, String state, String city, String otherAnimals,
+      String email, String phone, String fullName, String fencedBackYard) {
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('MM-dd-yyyy');
+    String formattedDate = formatter.format(now);
+
+    CollectionReference _firebaseRef = FirebaseFirestore.instance.collection('sitterPosts');
+    _firebaseRef.add({
+      "title": title,
+      "breedSize": breedSizeController,
+      "bio": bio,
+      "amountPerHour": amountPerHour,
+      "date": formattedDate,
+      "state": state,
+      "city": city,
+      "otherAnimals": otherAnimals,
+      "email": email,
+      "phone": phone,
+      "fullName": fullName,
+      "fencedBackYard": fencedBackYard
+    })
+        .then((value) => print("success (sitter post)"))
+        .catchError((error) => print("fail (sitter post): $error"));
 
 
 

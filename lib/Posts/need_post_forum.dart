@@ -20,8 +20,6 @@ class NeedPostForum extends StatefulWidget {
 class _NeedPostForumState extends State<NeedPostForum> {
   final dogBreedController = TextEditingController();
   final dogNameController = TextEditingController();
-  final stateController = TextEditingController();
-  final cityController = TextEditingController();
   final amountPerHourController = TextEditingController();
   final amountOfTimeController = TextEditingController();
   final fullNameController = TextEditingController();

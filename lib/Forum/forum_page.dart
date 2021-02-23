@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/Forum/stream_builder.dart';
 import 'package:hotel_for_dogs/Posts/need_post_forum.dart';
+import 'package:hotel_for_dogs/Posts/sitter_post_forum.dart';
 
 
 
@@ -148,7 +149,8 @@ class _ForumPageState extends State<ForumPage>{
           appBar: AppBar(
             title: Text('Dog Hotel'),
           ),
-          body: Container(
+          body: SingleChildScrollView(
+          child: Container(
               padding: const EdgeInsets.all(10.0),
               child: Column(
             children: [
@@ -164,7 +166,11 @@ class _ForumPageState extends State<ForumPage>{
                     ),
                     onPressed: () {
                       if (iAmSitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty){
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SitterPostForum(widget.email,widget.userID,stateController.text,cityController.text),
+                            ));
                       } else if (needASitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
                         Navigator.push(
                             context,
@@ -182,6 +188,7 @@ class _ForumPageState extends State<ForumPage>{
           )
           )
       ),
+      )
     );
   }
 }

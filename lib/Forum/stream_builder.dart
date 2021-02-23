@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hotel_for_dogs/Posts/need_post.dart';
+import 'package:hotel_for_dogs/Posts/sitter_post.dart';
 
 class MyStreamBuilder extends StatelessWidget {
   final String _typeOfPost;
@@ -18,25 +19,45 @@ class MyStreamBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.size > 0) {
             final List<DocumentSnapshot> documents = snapshot.data.docs;
-            return ListView(
-                children: documents
-                    .map((doc) => Card( child: NeedPost(
-                    doc['title'],
-                    doc['dogBreed'],
-                    doc['dogNeeds'],
-                    doc['amountOfTime'],
-                    doc['amountPerHour'],
-                    doc['pottyTrained'],
-                    doc['animalFriendly'],
-                    doc['date'],
-                    doc['state'],
-                    doc['city'],
-                    doc['dogName'],
-                    doc['email'],
-                    doc['phone'],
-                    doc['fullName'])
-                ))
-                    .toList());
+            if(_typeOfPost == "needPosts") {
+              return ListView(
+                  children: documents
+                      .map((doc) => Card( child: NeedPost(
+                      doc['title'],
+                      doc['dogBreed'],
+                      doc['dogNeeds'],
+                      doc['amountOfTime'],
+                      doc['amountPerHour'],
+                      doc['pottyTrained'],
+                      doc['animalFriendly'],
+                      doc['date'],
+                      doc['state'],
+                      doc['city'],
+                      doc['dogName'],
+                      doc['email'],
+                      doc['phone'],
+                      doc['fullName'])
+                  ))
+                      .toList());
+            } else {
+              return ListView(
+                  children: documents
+                      .map((doc) => Card( child: SitterPost(
+                      doc['title'],
+                      doc['amountPerHour'],
+                      doc['date'],
+                      doc['state'],
+                      doc['city'],
+                      doc['email'],
+                      doc['phone'],
+                      doc['fullName'],
+                      doc['breedSize'],
+                      doc['bio'],
+                      doc['fencedBackYard'],
+                      doc['otherAnimals'])
+                  ))
+                      .toList());
+            }
           } else if (snapshot.hasError) {
             return Text("error");
           } else if(!snapshot.hasData){
