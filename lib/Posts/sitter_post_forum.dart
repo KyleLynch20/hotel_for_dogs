@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/database.dart';
-import 'custom_row.dart';
+import 'package:hotel_for_dogs/HelperWidgets/custom_row.dart';
 import 'package:hotel_for_dogs/Forum/forum_page.dart';
-import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
+import 'package:hotel_for_dogs/HelperWidgets/custom_text_field.dart';
 
 class SitterPostForum extends StatefulWidget {
   // need to get email, uid, state, and city

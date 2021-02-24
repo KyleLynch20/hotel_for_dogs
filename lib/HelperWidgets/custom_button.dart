@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hotel_for_dogs/database.dart';
 
 class CustomButton extends StatelessWidget {
   final String _label;

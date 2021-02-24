@@ -111,8 +111,69 @@ class Database {
     })
         .then((value) => print("success (sitter post)"))
         .catchError((error) => print("fail (sitter post): $error"));
+  }
 
 
+  // need to add user id, full name, phone, email
+  static void makeNeedPost2( String title, String dogBreed, String dogNeeds,
+      String amountOfTime, String amountPerHour,
+      String pottyTrained, String animalFriendly,
+      String state, String city, String dogName,
+      String email, String phone, String fullName) {
 
+    var now = new DateTime.now();
+    var formatter = new DateFormat('MM-dd-yyyy');
+    String formattedDate = formatter.format(now);
+
+    CollectionReference _firebaseRef = FirebaseFirestore.instance.collection('posts');
+    _firebaseRef.add({
+      "title": title,
+      "dogBreed": dogBreed,
+      "dogNeeds": dogNeeds,
+      "amountOfTime": amountOfTime,
+      "amountPerHour": amountPerHour,
+      "pottyTrained": pottyTrained,
+      "animalFriendly": animalFriendly,
+      "date": formattedDate,
+      "state": state,
+      "city": city,
+      "dogName": dogName,
+      "email": email,
+      "phone": phone,
+      "fullName": fullName,
+      "typeOfPost": "needPost"
+    })
+        .then((value) => print("success (need post)"))
+        .catchError((error) => print("fail (need post): $error"));
+  }
+
+
+  static void makeSitterPost2(String title, String breedSizeController, String bio,
+      String amountPerHour, String state, String city, String otherAnimals,
+      String email, String phone, String fullName, String fencedBackYard) {
+
+    var now = new DateTime.now();
+    var formatter = new DateFormat('MM-dd-yyyy');
+    String formattedDate = formatter.format(now);
+
+    CollectionReference _firebaseRef = FirebaseFirestore.instance.collection('posts');
+    _firebaseRef.add({
+      "title": title,
+      "breedSize": breedSizeController,
+      "bio": bio,
+      "amountPerHour": amountPerHour,
+      "date": formattedDate,
+      "state": state,
+      "city": city,
+      "otherAnimals": otherAnimals,
+      "email": email,
+      "phone": phone,
+      "fullName": fullName,
+      "fencedBackYard": fencedBackYard,
+      "typeOfPost": "sitterPost"
+
+    })
+        .then((value) => print("success (sitter post)"))
+        .catchError((error) => print("fail (sitter post): $error"));
   }
 }

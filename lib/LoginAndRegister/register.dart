@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
+import 'package:hotel_for_dogs/HelperWidgets/custom_text_field.dart';
 import 'package:hotel_for_dogs/database.dart';
 
 

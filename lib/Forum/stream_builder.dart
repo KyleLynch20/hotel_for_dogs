@@ -11,11 +11,12 @@ class MyStreamBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Stream stream = FirebaseFirestore.instance.collection(_typeOfPost).where('state', isEqualTo: _state).where('city', isEqualTo: _city).snapshots();
     return SizedBox(
         height: 400,
         child: StreamBuilder<QuerySnapshot>(
           // needPosts
-        stream: FirebaseFirestore.instance.collection(_typeOfPost).where('state', isEqualTo: _state).where('city', isEqualTo: _city).snapshots(),
+        stream: stream,
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.size > 0) {
             final List<DocumentSnapshot> documents = snapshot.data.docs;

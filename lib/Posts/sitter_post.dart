@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_for_dogs/Posts/custom_text.dart';
+import 'package:hotel_for_dogs/HelperWidgets/custom_text.dart';
 
 class SitterPost extends StatelessWidget {
   final String _title;

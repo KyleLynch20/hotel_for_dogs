@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_for_dogs/LoginAndRegister/custom_text_field.dart';
+import 'package:hotel_for_dogs/HelperWidgets/custom_text_field.dart';
 import 'package:hotel_for_dogs/database.dart';
 import 'package:hotel_for_dogs/user.dart';
-import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/LoginAndRegister/image_container.dart';
-import 'file:///C:/Users/kyles/AndroidStudioProjects/hotel_for_dogs/lib/Forum/forum_page.dart';
+import 'package:hotel_for_dogs/LoginAndRegister/image_container.dart';
+import 'package:hotel_for_dogs/Forum/forum_page.dart';
 
 class Login extends StatefulWidget {
   @override
