@@ -29,14 +29,10 @@ class _NeedPostForumState extends State<NeedPostForum> {
   final pottyTrainedController = TextEditingController();
   final titleController = TextEditingController();
 
-  Future<String> delivery;
-  String errorMessage = "";
-
   @override
   Widget build(BuildContext context) {
     print(" email: " + widget.email + " uid: " + widget.uid + " state: " + widget.state + " city: " + widget.city);
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
           backgroundColor: Colors.grey[100],
           appBar: AppBar(
             title: Text('Dog Hotel'),
@@ -69,7 +65,6 @@ class _NeedPostForumState extends State<NeedPostForum> {
                           side: BorderSide(color: Colors.blueAccent)
                       ),
                       onPressed: () {
-                        // missing dog name, email, and phone, full name
                         Database.makeNeedPost(titleController.text,
                                               dogBreedController.text,
                                               bioController.text,
@@ -98,7 +93,6 @@ class _NeedPostForumState extends State<NeedPostForum> {
               ],
           )
           )
-      ),
-    );
+      );
   }
 }

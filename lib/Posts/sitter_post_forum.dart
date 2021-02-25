@@ -29,8 +29,7 @@ class _SitterPostForumState extends State<SitterPostForum> {
   @override
   Widget build(BuildContext context) {
     print(" email: " + widget.email + " uid: " + widget.uid + " state: " + widget.state + " city: " + widget.city);
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
           backgroundColor: Colors.grey[100],
           appBar: AppBar(
             title: Text('Dog Hotel'),
@@ -62,7 +61,6 @@ class _SitterPostForumState extends State<SitterPostForum> {
                             side: BorderSide(color: Colors.blueAccent)
                         ),
                         onPressed: () {
-                          // missing dog name, email, and phone, full name
                           Database.makeSitterPost(titleController.text,
                               breedSizeController.text,
                               bioController.text,
@@ -89,7 +87,6 @@ class _SitterPostForumState extends State<SitterPostForum> {
                 ],
               )
           )
-      ),
-    );
+      );
   }
 }

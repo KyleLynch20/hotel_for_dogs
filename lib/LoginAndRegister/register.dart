@@ -28,8 +28,7 @@ class _RegisterState extends State<Register>{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
           backgroundColor: Colors.grey[100],
           appBar: AppBar(
             title: Text('Dog Hotel'),
@@ -77,11 +76,9 @@ class _RegisterState extends State<Register>{
                     child: Text(errorMessage, style: TextStyle(fontSize: 20, color: Colors.red),)
                 ),
               )
-
             ],
           )
-      ),
-    );
+      );
   }
 }
 

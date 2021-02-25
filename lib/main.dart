@@ -8,6 +8,7 @@ void main() async  {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: 'Dog Hotel',
     // Start the app with the "/" named route. In this case, the app starts
     // on the FirstScreen widget.

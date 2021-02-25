@@ -33,8 +33,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
           backgroundColor: Colors.grey[100],
           appBar: AppBar(
             title: Text('Dog Hotel'),
@@ -86,7 +85,6 @@ class _LoginState extends State<Login> {
             ],
               )
           )
-      ),
-    );
+      );
   }
 }

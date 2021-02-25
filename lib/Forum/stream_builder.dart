@@ -20,7 +20,7 @@ class MyStreamBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data.size > 0) {
             final List<DocumentSnapshot> documents = snapshot.data.docs;
-            if(_typeOfPost == "needPosts") {
+            if (_typeOfPost == "needPosts") {
               return ListView(
                   children: documents
                       .map((doc) => Card( child: NeedPost(
