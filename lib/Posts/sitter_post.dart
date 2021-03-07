@@ -41,7 +41,7 @@ class SitterPost extends StatelessWidget {
             CustomText("Breed Size Willing To Watch", _breedSizeWillingToWatch.toString()),
             CustomText("Bio", _bio.toString()),
             CustomText("fenced In Back Yard", _fencedBackYard.toString()),
-            CustomText("Other Animals", _otherAnimals),
+            CustomText("Other Animals", _otherAnimals.toString()),
             CustomText("Email", _email.toString()),
             CustomText("Phone", _phone.toString()),
             CustomText("Name", _fullName.toString()),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_for_dogs/Forum/stream_builder.dart';
 import 'package:hotel_for_dogs/Posts/need_post_forum.dart';
 import 'package:hotel_for_dogs/Posts/sitter_post_forum.dart';
+import 'package:hotel_for_dogs/verify.dart';
 
 
 
@@ -23,6 +24,9 @@ class _ForumPageState extends State<ForumPage>{
   String typeOfPost = "not an empty string!";
   String state = "";
   String city = "";
+  bool allFieldsFull = true;
+  bool validStateAndCity = true;
+  Future<bool> delivery;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class _ForumPageState extends State<ForumPage>{
             children: [
               rowSelector(1),
               rowSelector(2),
-              MyStreamBuilder(typeOfPost, state, city),
+              MyStreamBuilder(typeOfPost, state, city, allFieldsFull,validStateAndCity),
               Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
                 child:  RaisedButton(
@@ -48,18 +52,27 @@ class _ForumPageState extends State<ForumPage>{
                         side: BorderSide(color: Colors.blueAccent)
                     ),
                     onPressed: () {
-                      if (iAmSitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty){
+                      if (iAmSitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
+                        allFieldsFull = true;
+                        _verifyStateAndCity();
+
+                        if (validStateAndCity)
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => SitterPostForum(widget.email,widget.userID,stateController.text,cityController.text),
                             ));
                       } else if (needASitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
+                        allFieldsFull = true;
+                        _verifyStateAndCity();
+                        if (validStateAndCity)
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => NeedPostForum(widget.email,widget.userID,stateController.text,cityController.text),
                             ));
+                      } else {
+                        allFieldsFull = false;
                       }
                     },
                     textColor: Colors.blueAccent,
@@ -169,13 +182,19 @@ class _ForumPageState extends State<ForumPage>{
                   onPressed: () {
                     setState(() {
                       if (iAmSitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
+                        _verifyStateAndCity();
+                        allFieldsFull = true;
                         typeOfPost = "needPosts";
                         state = stateController.text;
                         city = cityController.text;
                       } else if (needASitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
+                        _verifyStateAndCity();
+                        allFieldsFull = true;
                         typeOfPost = "sitterPosts";
                         state = stateController.text;
                         city = cityController.text;
+                      } else {
+                        allFieldsFull = false;
                       }
                     });
                   },
@@ -195,5 +214,16 @@ class _ForumPageState extends State<ForumPage>{
       return row2;
     }
   }
+
+  void _verifyStateAndCity() async {
+    delivery = Verify.verifyStateAndCity(state, city);
+
+    await delivery.then((bool verify) => setState(() {
+      validStateAndCity = verify;
+    }));
+  }
+
+
+
 }
 

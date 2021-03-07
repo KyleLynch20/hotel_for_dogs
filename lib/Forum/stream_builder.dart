@@ -7,7 +7,9 @@ class MyStreamBuilder extends StatelessWidget {
   final String _typeOfPost;
   final String _state;
   final String _city;
-  MyStreamBuilder(this._typeOfPost, this._state, this._city);
+  final bool _allFieldsFull;
+  final bool _validStateAndCity;
+  MyStreamBuilder(this._typeOfPost, this._state, this._city, this._allFieldsFull, this._validStateAndCity);
 
   @override
   Widget build(BuildContext context) {
@@ -24,38 +26,38 @@ class MyStreamBuilder extends StatelessWidget {
               return ListView(
                   children: documents
                       .map((doc) => Card( child: NeedPost(
-                      doc['title'],
-                      doc['dogBreed'],
-                      doc['dogNeeds'],
-                      doc['amountOfTime'],
-                      doc['amountPerHour'],
-                      doc['pottyTrained'],
-                      doc['animalFriendly'],
-                      doc['date'],
-                      doc['state'],
-                      doc['city'],
-                      doc['dogName'],
-                      doc['email'],
-                      doc['phone'],
-                      doc['fullName'])
+                      doc.data()['title'],
+                      doc.data()['dogBreed'],
+                      doc.data()['dogNeeds'],
+                      doc.data()['amountOfTime'],
+                      doc.data()['amountPerHour'],
+                      doc.data()['pottyTrained'],
+                      doc.data()['animalFriendly'],
+                      doc.data()['date'],
+                      doc.data()['state'],
+                      doc.data()['city'],
+                      doc.data()['dogName'],
+                      doc.data()['email'],
+                      doc.data()['phone'],
+                      doc.data()['fullName'])
                   ))
                       .toList());
             } else {
               return ListView(
                   children: documents
                       .map((doc) => Card( child: SitterPost(
-                      doc['title'],
-                      doc['amountPerHour'],
-                      doc['date'],
-                      doc['state'],
-                      doc['city'],
-                      doc['email'],
-                      doc['phone'],
-                      doc['fullName'],
-                      doc['breedSize'],
-                      doc['bio'],
-                      doc['fencedBackYard'],
-                      doc['otherAnimals'])
+                      doc.data()['title'],
+                      doc.data()['amountPerHour'],
+                      doc.data()['date'],
+                      doc.data()['state'],
+                      doc.data()['city'],
+                      doc.data()['email'],
+                      doc.data()['phone'],
+                      doc.data()['fullName'],
+                      doc.data()['breedSize'],
+                      doc.data()['bio'],
+                      doc.data()['fencedBackYard'],
+                      doc.data()['otherAnimals'])
                   ))
                       .toList());
             }
@@ -66,7 +68,13 @@ class MyStreamBuilder extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else {
-            return Text("No Data");
+            if (!_allFieldsFull) {
+              return Text("Please enter in a valid city and state and click on either I am a sitter or Need a sitter.");
+            } else if(!_validStateAndCity) {
+              return Text("Please enter in a valid city and state");
+            } else {
+              return Text("No Data");
+            }
           }
             }));
   }
