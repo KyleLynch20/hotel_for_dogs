@@ -60,6 +60,7 @@ class Database {
                             String state, String city, String dogName,
                             String email, String phone, String fullName) {
 
+
     var now = new DateTime.now();
     var formatter = new DateFormat('MM-dd-yyyy');
     String formattedDate = formatter.format(now);

@@ -15,7 +15,7 @@ class CustomRow extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: new Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(5.0),
             child:TextField(
               controller: _controller1,
               decoration: InputDecoration(
@@ -28,7 +28,7 @@ class CustomRow extends StatelessWidget {
         ),
         Expanded(
           child: new Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(5.0),
             child: TextField(
               controller: _controller2,
               decoration: InputDecoration(

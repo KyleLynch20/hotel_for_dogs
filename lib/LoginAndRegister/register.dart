@@ -16,7 +16,7 @@ class _RegisterState extends State<Register>{
   String errorMessage = "";
 
   void emailSignUp() async {
-    delivery = Database.signUp(emailController.text, passwordController.text, confirmPasswordController.text);
+    delivery = Database.signUp(emailController.text.trim(), passwordController.text, confirmPasswordController.text);
     await delivery.then((String result) => setState(() {
       if (result == "success") {
         Navigator.pushNamed(context, "/");
@@ -33,13 +33,14 @@ class _RegisterState extends State<Register>{
           appBar: AppBar(
             title: Text('Dog Hotel'),
           ),
-          body: Column(
+          body: SingleChildScrollView(
+            child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CustomTextField("Email", emailController),
-              CustomTextField("Password", passwordController),
-              CustomTextField("Confirm Password", confirmPasswordController),
+              CustomTextField("Email", emailController, false),
+              CustomTextField("Password", passwordController, true),
+              CustomTextField("Confirm Password", confirmPasswordController, true),
               Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
                 child:  RaisedButton(
@@ -77,6 +78,7 @@ class _RegisterState extends State<Register>{
                 ),
               )
             ],
+          )
           )
       );
   }

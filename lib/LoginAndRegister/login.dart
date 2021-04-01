@@ -17,7 +17,7 @@ class _LoginState extends State<Login> {
   String errorMessage = "";
 
   void _login() async {
-    delivery = Database.login(emailController.text, passwordController.text);
+    delivery = Database.login(emailController.text.trim(), passwordController.text);
     await delivery.then((Users user) => setState(() {
       if (user.email == null && user.uid == null) {
         errorMessage = user.errorMessage;
@@ -44,8 +44,8 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ImageContainer(),
-                CustomTextField("Email", emailController),
-                CustomTextField("Password", passwordController),
+                CustomTextField("Email", emailController, false),
+                CustomTextField("Password", passwordController, true),
                 Container(
                   padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
                   child:  RaisedButton(

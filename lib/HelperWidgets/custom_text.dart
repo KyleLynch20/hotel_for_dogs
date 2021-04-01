@@ -10,7 +10,7 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-      child: Text(_label1 + ": " + _label2, style: TextStyle(fontSize: 16),),
+      child: Text(_label1 + _label2, style: TextStyle(fontSize: 16),),
     );
   }
 }

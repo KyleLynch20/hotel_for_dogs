@@ -43,7 +43,7 @@ class _ForumPageState extends State<ForumPage>{
             children: [
               rowSelector(1),
               rowSelector(2),
-              MyStreamBuilder(typeOfPost, state, city, allFieldsFull,validStateAndCity),
+              MyStreamBuilder(typeOfPost, state.toLowerCase().trim(), city.toLowerCase().trim(), allFieldsFull, validStateAndCity),
               Container(
                 padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
                 child:  RaisedButton(
@@ -53,26 +53,25 @@ class _ForumPageState extends State<ForumPage>{
                     ),
                     onPressed: () {
                       if (iAmSitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
-                        allFieldsFull = true;
-                        _verifyStateAndCity();
-
-                        if (validStateAndCity)
+                        //allFieldsFull = true;
+                        //_verifyStateAndCity();
+                        //if (validStateAndCity)
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SitterPostForum(widget.email,widget.userID,stateController.text,cityController.text),
+                              builder: (context) => SitterPostForum(widget.email,widget.userID,stateController.text.toLowerCase().trim(),cityController.text.toLowerCase().trim()),
                             ));
                       } else if (needASitterColor == Colors.black && stateController.text.isNotEmpty && cityController.text.isNotEmpty) {
-                        allFieldsFull = true;
-                        _verifyStateAndCity();
-                        if (validStateAndCity)
+                        //allFieldsFull = true;
+                        //_verifyStateAndCity();
+                        //if (validStateAndCity)
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => NeedPostForum(widget.email,widget.userID,stateController.text,cityController.text),
+                              builder: (context) => NeedPostForum(widget.email,widget.userID,stateController.text.toLowerCase().trim(),cityController.text.toLowerCase().trim()),
                             ));
                       } else {
-                        allFieldsFull = false;
+                        //allFieldsFull = false;
                       }
                     },
                     textColor: Colors.blueAccent,
@@ -148,10 +147,10 @@ class _ForumPageState extends State<ForumPage>{
         Expanded(
           child: new Padding(
             padding: const EdgeInsets.all(10.0),
-            child:TextField(
-              controller: stateController,
+            child: TextField(
+              controller: cityController,
               decoration: InputDecoration(
-                labelText: "State",
+                labelText: "City",
               ),
               cursorColor: Colors.blueAccent,
             ),
@@ -160,10 +159,10 @@ class _ForumPageState extends State<ForumPage>{
         Expanded(
           child: new Padding(
             padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              controller: cityController,
+            child:TextField(
+              controller: stateController,
               decoration: InputDecoration(
-                labelText: "City",
+                labelText: "State",
               ),
               cursorColor: Colors.blueAccent,
             ),

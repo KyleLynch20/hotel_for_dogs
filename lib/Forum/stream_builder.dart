@@ -69,9 +69,11 @@ class MyStreamBuilder extends StatelessWidget {
             );
           } else {
             if (!_allFieldsFull) {
-              return Text("Please enter in a valid city and state and click on either I am a sitter or Need a sitter.");
+              return Text("No Data");
+              //return Text("Please enter in a valid city and state and click on either I am a sitter or Need a sitter.");
             } else if(!_validStateAndCity) {
-              return Text("Please enter in a valid city and state");
+              return Text("No Data");
+              //return Text("Please enter in a valid city and state");
             } else {
               return Text("No Data");
             }
